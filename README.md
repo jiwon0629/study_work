@@ -1,127 +1,23 @@
 # study_work  
 
 
-WSL
-
-WSL(Windows Subsystem for Linux) 환경에서 Dockerfile은 Docker 이미지를 만들기 위한 텍스트 기반의 스크립트 파일이다. 
-이 파일은 애플리케이션 실행에 필요한 환경 설정, 종속성 설치, 소스 코드 복사, 실행 명령어 등을 순서대로 정의다. 
-환경의 일치: 스프링 앱이나 도커 컨테이너는 나중에 실제 서비스 될 때 대부분 리눅스 서버에서 돌아간다. 윈도우에서 개발하고 리눅스에 배포하면 환경 차이 때문에 "내 컴퓨터에선 됐는데 서버에선 왜 안 되지?" 하는 문제가 생기는데, WSL을 쓰면 개발 단계부터 리눅스 환경을 그대로 쓸 수 있어 이 문제가 사라진다.
-도커(Docker): 도커는 원래 리눅스 기술이다. 윈도우용 도커도 내부적으로는 사실 WSL을 빌려 쓰고 있다. 그래서 WSL을 직접 쓰면 도커 속도가 훨씬 빠르고 안정적이다.
-
-Dockerfile : 설명서
-image
-container
-
-컨테이너 이미지를 '생성'하는 이유
-이미지는 "프로그램 실행에 필요한 모든 것(코드, 라이브러리, 설정 등) 설계도"
-불변성 (Immutable): 한 번 만든 이미지는 절대 변하지 않는다. 따라서 100번을 실행해도 100번 다 똑같이 작동한다.
-버전 관리: "1.0 version image", "2.0 version image" 식으로 파일 하나만 바꾸면 되기 때문에 업데이트와 복구가 매우 쉽다.
-어떤 환경에서도 동일한 실행 결과를 보장하기 위해 모든 설정을 패키징하는 것
-
-컨테이너를 '만드는' 이유
-이미지가 '설계도'라면, 컨테이너는 그 설계도대로 만든 '실제 작동하는 프로그램'이다.
-격리 (Isolation): 각 컨테이너는 서로 독립된 방에 살고 있다. 예를 들어, 한 컨테이너가 고장 나서 서버가 죽어도 다른 컨테이너(DB 등)에는 영향을 주지 않는다.
-효율성: 가상 머신(VM)처럼 컴퓨터 한 대를 통째로 흉내 내는 게 아니라, 필요한 프로그램만 딱 띄우기 때문에 훨씬 가볍고 빠르다.
-
-
-
-
-
-
-
-옵션 요약
--t (Tag): 이름표. 이름:버전 안 쓰면 나중에 none으로 떠서 찾기 힘듦.
--d (Detached): 백그라운드. 터미널 하나 더 띄우기 귀찮을 때 필수.
--p (Publish): 외부:내부. 윈도우에서 접속하려면 무조건 써야 함. (예: 18000:8000)
--it: 대화 모드. -i(입력) + -t(터미널 화면). /bin/bash랑 세트.
-exec vs run:
-run: 아예 새로운 컨테이너(새 집)를 만드는 것. (데이터 날아감 주의)
-exec: 이미 살아있는 컨테이너(살고 있는 집)에 들어가는 것.
-
-Docker 이미지 빌드 루틴
-# 1. Dockerfile 작성 (FROM -> WORKDIR -> COPY -> CMD)
-touch Dockerfile
-
-# 2. 필요한 라이브러리 목록 생성 (파일이 있어야 빌드 에러 안 남)
-touch requirements.txt
-
-# 3. 이미지 빌드 (마지막 점 '.' 빼먹으면 에러)
-docker build -t (이름):(버전) .
-
-# 4. 컨테이너 실행 (포트 연결 확인)
-docker run -d -p 18000:8000 --name jiwon_server image-jiwon:1.0
-
-
-
-
-
-
-컨테이너 내부
-컨테이너 안에서 코드 바로 박기 (EOF 기법):
-에디터 안 띄우고 터미널에서 바로 파일 만들 때
-
-cat > app2.py << 'EOF'
-# 여기에 코드 붙여넣기
-EOF
-
-컨테이너 안으로 들어가기:
-
-docker exec -it [컨테이너이름] /bin/bash
-들어간 후 ls로 파일 확인, python 파일명.py로 수동 실행 가능.
-
-데이터베이스 백업 (Postgres 필수)
-DB 덤프 (전체 백업): 컨테이너 밖(WSL)에서 실행하면 SQL 파일이 밖으로 툭 떨어짐.
-
-docker exec postgres_db pg_dump -U jiwon -d jiwondb > backup.sql
-
-
-이미지 빌드부터 실행까지 (Python/Flask 예시)
-① 환경 준비 (Dockerfile 작성)
-Dockerfile
-FROM python:3.8-slim      # 베이스 이미지 설정
-WORKDIR /app              # 작업 폴더 지정
-RUN pip install (라이브러리명)     # 필요한 라이브러리 설치
-COPY app2.py .            # 내 파일을 컨테이너로 복사
+🐧 WSL 기반 Docker & Container 완벽 가이드이 문서는 Windows Subsystem for Linux (WSL) 환경에서 Docker를 효율적으로 활용하고, 컨테이너화된 애플리케이션을 관리하는 핵심 개념과 명령어를 정리합니다.1. 왜 WSL에서 Docker를 사용하는가?환경의 일치 (Parity): 대부분의 서버는 리눅스입니다. 개발 단계(WSL)부터 운영 환경과 동일한 리눅스 환경을 사용함으로써 "내 컴퓨터에선 되는데 서버에선 안 돼요"라는 문제를 원천 차단합니다.성능과 안정성: Windows용 Docker Desktop은 내부적으로 WSL 2 백엔드를 사용합니다. WSL을 직접 활용하면 파일 시스템 액세스 속도가 훨씬 빠르고 시스템 자원을 효율적으로 사용합니다.2. Docker 핵심 개념: 설계도와 실체구분개념비유특징Dockerfile텍스트 스크립트설명서환경 설정, 소스 복사, 실행 명령 정의Image실행 파일 패키지설명서로 만든 설계도불변성(Immutable), 버전 관리 가능Container실행 중인 프로세스설계도로 지은 실제 집격리성(Isolation), 가볍고 빠른 실행3. Docker 필수 명령어 및 옵션 요약💡 주요 옵션-t (Tag): 이미지에 이름과 버전을 부여 (예: my-app:1.0). 지정하지 않으면 <none>으로 표시되어 관리가 어렵습니다.-d (Detached): 컨테이너를 백그라운드에서 실행합니다.-p (Publish): 호스트포트:컨테이너포트. 외부(Windows 브라우저)에서 접속하기 위해 필수입니다.-it: -i(Interactive) + -t(TTY). 컨테이너 내부 터미널과 상호작용할 때 사용합니다.🔄 run vs execdocker run: 새로운 이미지로 새 컨테이너를 생성하고 실행합니다. (매번 실행 시 데이터 초기화 주의)docker exec: 이미 실행 중인 컨테이너 내부에서 명령어를 실행합니다. (점검 및 디버깅용)4. 이미지 빌드 및 실행 루틴 (Python/Flask 예시)① 파일 준비DockerfileDockerfileFROM python:3.8-slim      # 베이스 이미지 설정
+WORKDIR /app              # 컨테이너 내 작업 폴더
+RUN pip install -r requirements.txt  # 라이브러리 설치
+COPY . .                  # 현재 폴더의 모든 파일을 컨테이너로 복사
 EXPOSE 8000               # 8000번 포트 사용 예고
-CMD ["python", "app2.py"] # 컨테이너 시작 시 실행할 명령
-② 이미지 빌드 및 실행
-이미지 생성: docker build -t (이름) . (마지막 점은 현재 폴더를 의미)
-컨테이너 구동: docker run -d -p (외부 포트번호):(내부 포트번호) --name (컨테이너명) (폴더명)
-③ 네트워크 구조 이해
-[Windows 브라우저] → localhost:18000 → [WSL] → -p 18000:8000 → [Docker 컨테이너] → 8000포트 (Flask)
+CMD ["python", "app.py"]  # 시작 명령
+② 빌드 및 실행 프로세스Bash# 1. 빌드 (마지막 점 '.' 필수 - 현재 경로 의미)
+docker build -t my-python-app:1.0 .
 
-컨테이너 관리 및 유지보수
-상태 확인: docker ps (실행 중), docker ps -a (모든 상태)
-내부 접속: docker exec -it (컨테이너 명) /bin/bash
-데이터 백업 (DB 덤프): docker exec postgres_db pg_dump -U jiwon -d jiwondb > jiwondb_backup.sql
-데이터 유지: 컨테이너를 지우면 데이터도 사라지므로 Docker Volume 사용 권장.
-
-Linux 기반 개발 팁 (WSL 명령어)
-파일 생성: cat > FILE << 'EOF' (긴 코드를 한 번에 파일로 저장할 때 유용)
-편집기: nano (간단한 수정), touch (빈 파일 생성)
-프로세스 확인: ps (현재 어떤 프로그램이 도는지 확인)
-
-docker volume : Container파일 저장소
-docker attach : Container 동작 processor 접근
-docker start : Container 실행(기존에 만들어진 container)
-docker stop : 실행 중인 Container 종료
-docker restart : 실행 중인 Container 재실행
-에러 
-에러 메시지
-원인
-해결책
-stat /bash: no such file...
-경로를 안 적음
-/bash 말고 /bin/bash로 입력
-No such file: requirements.txt
-빌드 시 필요한 파일 없음
-touch requirements.txt로 빈 파일이라도 생성
-is not running
-컨테이너가 잠자는 중
-docker start [이름] 먼저 실행
-Permission denied
-권한 문제
-명령어 앞에 sudo 붙이거나 유저 권한 체크
-
-
-
+# 2. 실행 (Windows 18000포트 -> 컨테이너 8000포트 연결)
+docker run -d -p 18000:8000 --name my_server my-python-app:1.0
+5. 컨테이너 내부 관리 및 유지보수📂 파일 작업 (EOF 기법)에디터 없이 터미널에서 즉시 파일 생성:Bashcat > app.py << 'EOF'
+from flask import Flask
+app = Flask(__name__)
+@app.route('/')
+def hello(): return "Hello Docker!"
+if __name__ == "__main__": app.run(host='0.0.0.0', port=8000)
+EOF
+🗄️ 데이터베이스 백업 (PostgreSQL)컨테이너 밖(WSL)으로 DB 덤프 파일 추출:Bashdocker exec postgres_db pg_dump -U [사용자명] -d [DB명] > backup.sql
+🛠️ 기타 관리 명령어docker ps -a: 모든 컨테이너 상태 확인docker volume: 컨테이너 삭제 후에도 데이터를 보존하기 위한 저장소 관리docker stop / start / restart: 컨테이너 상태 제어docker exec -it [이름] /bin/bash: 컨테이너 내부 터미널 접속6. 트러블슈팅 (에러 해결)에러 메시지원인해결책stat /bash: no such file...경로 오류/bash 대신 /bin/bash 사용No such file: requirements.txt빌드 시 파일 누락touch requirements.txt로 빈 파일 생성 후 재빌드is not running컨테이너 중지됨docker start [이름] 실행Permission denied권한 부족명령어 앞 sudo 추가 또는 유저 그룹 설정 확인Tip: WSL 환경에서는 Windows 브라우저에서 localhost:18000으로 접속하면 포트 포워딩을 통해 컨테이너의 서비스에 바로 접근할 수 있습니다.
