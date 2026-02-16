@@ -43,12 +43,18 @@
 - Fine-tuning: 자체 데이터를 기반으로 SentenceTransformers를 사용하여 모델을 세밀하게 조정할 수 있습니다.
 
 
-## 🚀 4. 주요 응용 분야  
+# 🚀 4. 주요 응용 분야  
 
 이미지 유사성 기법은 다양한 실무 환경에서 활용됩니다.  
 - 전자상거래: 제품 매칭 및 추천 시스템.
 - 이미지 검색: 쿼리 이미지와 유사한 이미지를 데이터베이스에서 탐색.
-- 객체 및 얼굴 인식: 알려진 데이터베이스와 비교하여 신원 식별 및 사물 확인.🚨 5. 구현 팁 (Python)<details><summary>💻 <b>SSIM 간단 코드 예시 (클릭하여 펼치기)</b></summary>Pythonfrom skimage.metrics import structural_similarity as ssim
+- 객체 및 얼굴 인식: 알려진 데이터베이스와 비교하여 신원 식별 및 사물 확인.
+
+# 🚨 5. 구현 팁 (Python)  
+
+<details><summary>💻 <b>SSIM 간단 코드 예시 (클릭하여 펼치기)</b></summary>  
+ 
+from skimage.metrics import structural_similarity as ssim
 import cv2
 
 # 이미지 로드 및 그레이스케일 변환
