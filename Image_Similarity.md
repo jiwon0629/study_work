@@ -53,7 +53,8 @@
 # 🚨 5. 구현 팁 (Python)  
 
 <details><summary>💻 <b>SSIM 간단 코드 예시 (클릭하여 펼치기)</b></summary>  
- 
+
+ ```python
 from skimage.metrics import structural_similarity as ssim
 import cv2
 
@@ -67,4 +68,7 @@ img2 = cv2.resize(img2, (img1.shape[1], img1.shape[0]))
 # SSIM 계산
 score, diff = ssim(img1, img2, full=True)
 print(f"Similarity Score: {score:.4f}")
-</details>Reference: 파이썬에서 이미지 유사성 접근법 탐구 (Vasista Reddy)Last Updated: 2026-02-16
+```
+</details>  
+Reference: 파이썬에서 이미지 유사성 접근법 탐구 
+(Vasista Reddy)Last Updated: 2026-02-16
