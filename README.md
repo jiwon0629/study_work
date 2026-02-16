@@ -42,10 +42,11 @@ docker build -t my-server:1.0 .
 
 # 3. 컨테이너 실행
 docker run -d -p 18000:8000 --name my_running_app my-server:1.0
+```
 🐍 4. Python/Flask 실전 예제
 <details>
 <summary>📂 <b>Dockerfile 작성 예시 (클릭하여 펼치기)</b></summary>
-```
+
 
 Dockerfile
 FROM python:3.8-slim
