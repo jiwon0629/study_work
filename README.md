@@ -100,6 +100,4 @@ No such file: requirements.txt
 
 Last Updated: 2026-02-16
 
-Maintainer: Your Name
-
 
