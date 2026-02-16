@@ -19,11 +19,37 @@
 
  - 일반적 지표: 히스토그램 교차점, 상관관계.
  - 장점: 계산이 매우 빠름.
+ - 
 📐 구조적 유사성 지수 (SSIM)
-휘도(Luminance), 대비(Contrast), 구조(Structure)를 종합적으로 평가합니다.
+
+휘도(Luminance), 대비(Contrast), 구조(Structure)를 종합적으로 평가합니다.  
+
  - 점수 범위: -1(전혀 다름) ~ 1(동일).
  - 주의사항: 비교할 두 이미지의 크기가 반드시 동일해야 합니다. 배경 제거 및 투명도 처리를 통해 유사도 점수를 높일 수 있습니다.
-📍 특징 기반 (Feature-based)이미지 내의 뚜렷한 특징점(Keypoints)을 식별합니다.SIFT: 스케일 불변 특징 변환.SURF: 가속화된 강인한 특징 추출.🧠 딥러닝 기반 (Deep Learning)사전 학습된 모델을 통해 고차원의 특징을 추출합니다.Pre-trained Models: ResNet, VGG, Inception 등.OpenAI CLIP: 미세 조정 없이도 뛰어난 성능을 내는 다중 모달 제로 샷 분류기입니다.Fine-tuning: 자체 데이터를 기반으로 SentenceTransformers를 사용하여 모델을 세밀하게 조정할 수 있습니다.🚀 4. 주요 응용 분야이미지 유사성 기법은 다양한 실무 환경에서 활용됩니다.전자상거래: 제품 매칭 및 추천 시스템.이미지 검색: 쿼리 이미지와 유사한 이미지를 데이터베이스에서 탐색.객체 및 얼굴 인식: 알려진 데이터베이스와 비교하여 신원 식별 및 사물 확인.🚨 5. 구현 팁 (Python)<details><summary>💻 <b>SSIM 간단 코드 예시 (클릭하여 펼치기)</b></summary>Pythonfrom skimage.metrics import structural_similarity as ssim
+
+📍 특징 기반 (Feature-based)  
+
+이미지 내의 뚜렷한 특징점(Keypoints)을 식별합니다.  
+
+ - SIFT: 스케일 불변 특징 변환.
+ - SURF: 가속화된 강인한 특징 추출.  
+
+🧠 딥러닝 기반 (Deep Learning)  
+
+사전 학습된 모델을 통해 고차원의 특징을 추출합니다.  
+
+- Pre-trained Models: ResNet, VGG, Inception 등.
+- OpenAI CLIP: 미세 조정 없이도 뛰어난 성능을 내는 다중 모달 제로 샷 분류기입니다.
+- Fine-tuning: 자체 데이터를 기반으로 SentenceTransformers를 사용하여 모델을 세밀하게 조정할 수 있습니다.
+
+---
+<br>
+## 🚀 4. 주요 응용 분야  
+
+이미지 유사성 기법은 다양한 실무 환경에서 활용됩니다.  
+- 전자상거래: 제품 매칭 및 추천 시스템.
+- 이미지 검색: 쿼리 이미지와 유사한 이미지를 데이터베이스에서 탐색.
+- 객체 및 얼굴 인식: 알려진 데이터베이스와 비교하여 신원 식별 및 사물 확인.🚨 5. 구현 팁 (Python)<details><summary>💻 <b>SSIM 간단 코드 예시 (클릭하여 펼치기)</b></summary>Pythonfrom skimage.metrics import structural_similarity as ssim
 import cv2
 
 # 이미지 로드 및 그레이스케일 변환
