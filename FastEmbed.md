@@ -53,10 +53,13 @@ pip install fastembed-gpu
 | -- | -- | -- |
 | 추론 속도 (CPU) | 보통 | 50% 이상 향상 | 
 | 의존성 | 무거움 (PyTorch 등) | 가벼움 (ONNX) | 
-주요 활용일반 워크스테이션서버리스 / 엣지 환경정확도모델별 상이OpenAI Ada-002 대비 우수
+| 주요 활용 | 일반 워크스테이션 | 서버리스 / 엣지 환경 | 
+| 정확도 | 모델별 상이 | OpenAI Ada-002 대비 우수 |
 
 ## 💡 결론
 
-FastEmbed는 로컬 CPU 환경에서 비용 효율적으로 빠르게 대규모 문서를 임베딩하고 싶을 때 가장 적합한 도구입니다. 특히 Qdrant 벡터 데이터베이스와의 연동이 매우 쉽고 RAG 파이프라인 구축에 최적화되어 있습니다.
+FastEmbed는 로컬 CPU 환경에서 비용 효율적으로 빠르게 대규모 문서를 임베딩하고 싶을 때 가장 적합한 도구입니다. 
+특히 Qdrant 벡터 데이터베이스와의 연동이 매우 쉽고 RAG 파이프라인 구축에 최적화되어 있습니다.
+
 ---
 Maintainer: jiwon0629Reference: Qdrant FastEmbed Documentation
