@@ -1,7 +1,7 @@
 ```python
 # 객체 탐지 내구성 테스트용 RTSP 다중 송출 프로그램
 # 8554 포트 활용, 채널명 test1~30 확장
-# 브라우저 확인: http://127.0.0.1:8889/test1 ~ http://127.0.0.1:8889/test30
+# 브라우저 확인: rtsp주소/test1 ~ rtsp주소/test30
 
 import subprocess # 외부 프로세스(FFmpeg) 실행을 위한 모듈
 import os         # 파일 경로 및 시스템 관리를 위한 모듈
@@ -9,7 +9,7 @@ import time       # 프로세스 실행 간격 조절을 위한 모듈
 
 def start_durability_test(file_path, stream_name):
    
-    rtsp_url = f"rtsp://192.168.0.24:8554/{stream_name}"
+    rtsp_url = f"rtsp주소/{stream_name}"
     
     # FFmpeg 명령어 구성 (내구성 테스트를 위해 리소스 사용량 최적화)(리스트 형태로 작성하여 안정성 확보)
     command = [
@@ -48,7 +48,7 @@ try:
         p = start_durability_test(base_video, channel_name)
         processes.append(p) # 나중에 한꺼번에 종료하기 위해 리스트에 저장
         
-        print(f"[{i}/{test_channels_count}] 송출 중: http://127.0.0.1:8889/{channel_name}")
+        print(f"[{i}/{test_channels_count}] 송출 중: rtsp주소/{channel_name}")
         
         # 서버 과부하 방지를 위해 실행 간격을 아주 짧게 둠
         time.sleep(0.1)
