@@ -1,3 +1,56 @@
+# 🚀 FFmpeg 기반 RTSP 다중 채널 스트리밍 테스트 시스템
+
+이 프로젝트는 **객체 탐지(Object Detection)** 모델 및 분석 서버의 내구성 테스트를 위해 여러 개의 MP4 영상 파일을 실시간 **RTSP 스트림**으로 변환하여 송출하는 자동화 스크립트입니다.
+
+## 📌 프로젝트 개요
+* **목적**: 다수의 CCTV 채널이 가동되는 환경을 가상으로 구축하여 분석 시스템의 부하 및 안정성 테스트 수행.
+* **주요 기능**:
+  * 특정 폴더(`input/test/video_test`) 내의 MP4 파일을 자동 스캔 및 정렬.
+  * FFmpeg 프로세스를 병렬로 실행하여 각 파일을 독립된 RTSP 채널(`test1`, `test2`...)로 송출.
+  * 고효율 인코딩 설정을 통해 단일 시스템에서 저부하 다중 송출(10개 이상) 최적화.
+
+## 🛠 시스템 구조 및 작동 원리
+
+
+1. **송출부 (Python & FFmpeg)**: `subprocess`를 통해 FFmpeg를 제어하며, 영상을 H.264 코덱으로 실시간 인코딩하여 서버로 푸시(Push)합니다.
+2. **중계부 (MediaMTX)**: 윈도우 호스트에서 실행되는 오픈소스 미디어 서버로, RTSP 데이터를 수신하여 관리합니다.
+3. **수신부 (Web/VLC)**: 서버에 등록된 스트림을 WebRTC(포트 8889) 또는 RTSP(포트 8554) 프로토콜을 통해 실시간 모니터링합니다.
+
+## 📋 사전 준비 사항
+* **MediaMTX**: [공식 릴리즈](https://github.com/bluenviron/mediamtx/releases)에서 다운로드 후 실행 (`mediamtx.exe`).
+* **FFmpeg**: 시스템 환경 변수에 등록되어 터미널에서 `ffmpeg` 명령어가 동작해야 합니다.
+* **네트워크**: 도커 컨테이너에서 실행 시 호스트 IP(`192.168.0.24`) 접근 권한 및 방화벽 설정이 필요합니다.
+
+## 💻 코드 상세 설명
+
+### 1. RTSP 송출 핵심 로직
+`start_durability_test` 함수는 FFmpeg 명령어를 생성하고 백그라운드에서 실행합니다.
+
+```python
+def start_durability_test(file_path, stream_name):
+    # 송출 대상 서버 주소 (윈도우 호스트 IP 및 RTSP 기본 포트 8554)
+    rtsp_url = f"rtsp://192.168.0.24:8554/{stream_name}"
+    
+    command = [
+        'ffmpeg',
+        '-re',                          # 실시간 속도(Real-time) 유지
+        '-stream_loop', '-1',           # 영상 무한 반복 실행
+        '-i', file_path,                # 입력 파일 경로
+        '-c:v', 'libx264',              # H.264 비디오 코덱 지정
+        '-preset', 'ultrafast',         # CPU 사용량 최소화를 위한 인코딩 프리셋
+        '-tune', 'zerolatency',         # 스트리밍 지연 시간 제거
+        '-b:v', '500k',                 # 비트레이트 제한 (500kbps)
+        '-flags', '+global_header',     # 표준 RTSP 전송을 위한 헤더 설정
+        '-crf', '28',                   # 품질 지수 설정 (저부하 최적화)
+        '-vf', 'scale=640:360,fps=15',  # 해상도 축소 및 프레임 하향 조정
+        '-f', 'rtsp',                   # 출력 포맷 지정
+        '-rtsp_transport', 'tcp',       # 안정적인 전송을 위한 TCP 프로토콜 사용
+        rtsp_url
+    ]
+    # 백그라운드 프로세스 실행 (로그 출력 제외로 성능 최적화)
+    return subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+
 ```python
 # 객체 탐지 내구성 테스트용 RTSP 다중 송출 프로그램
 # 8554 포트 활용, 채널명 test1~30 확장
