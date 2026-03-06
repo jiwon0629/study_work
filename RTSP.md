@@ -5,7 +5,7 @@ import time
 
 def start_durability_test(file_path, stream_name):
    
-    rtsp_url = f"rtsp://192.168.0.24:8554/{stream_name}"
+    rtsp_url = f"rtsp주소/{stream_name}"
     
     # FFmpeg 명령어 구성 (내구성 테스트를 위해 리소스 사용량 최적화)
     command = [
@@ -46,7 +46,7 @@ try:
         p = start_durability_test(full_path, channel_name)
         processes.append(p)
         
-        print(f"[{i}/{test_channels_count}] 송출 중: http://192.168.0.24:8889/{channel_name}")
+        print(f"[{i}/{test_channels_count}] 송출 중: 주소/{channel_name}")
         
        
         time.sleep(0.1)
