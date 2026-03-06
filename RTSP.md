@@ -158,7 +158,7 @@ Localhost 이슈 (Network Isolation):
 
 도커 컨테이너 내부에서 127.0.0.1은 컨테이너 자신을 가리킵니다.
 
-윈도우 호스트에 있는 MediaMTX에 접속하려면 반드시 호스트 IP(192.168.0.24) 또는 **host.docker.internal**을 사용해야 합니다.
+윈도우 호스트에 있는 MediaMTX에 접속하려면 반드시 호스트 IP 또는 **host.docker.internal**을 사용해야 합니다.
 
 윈도우 방화벽 설정:
 
@@ -167,3 +167,8 @@ Localhost 이슈 (Network Isolation):
 8554 포트: RTSP 송수신용
 
 8889 포트: WebRTC 웹 모니터링용
+
+## 결과 사진
+![Uploading RTSP_1.png…]()
+
+
