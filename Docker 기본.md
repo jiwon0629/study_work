@@ -80,19 +80,6 @@ EOF
 
 # 실행 중인 컨테이너 접속
 docker exec -it my_running_app /bin/bash
-</details>
 
-🚨 5. 트러블슈팅 가이드 (에러 해결)
-stat /bash: no such file...
-
-원인: 경로를 잘못 입력함.
-
-해결: /bash가 아니라 /bin/bash로 입력하세요.
-
-No such file: requirements.txt
-
-원인: 빌드 시 파일 누락.
-
-해결: touch requirements.txt로 빈 파일 생성.
 
 Last Updated: 2026-02-16
