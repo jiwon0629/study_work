@@ -19,7 +19,7 @@
 ## 📋 사전 준비 사항
 * **MediaMTX**: [공식 릴리즈](https://github.com/bluenviron/mediamtx/releases)에서 다운로드 후 실행 (`mediamtx.exe`).
 * **FFmpeg**: 시스템 환경 변수에 등록되어 터미널에서 `ffmpeg` 명령어가 동작해야 합니다.
-* **네트워크**: 도커 컨테이너에서 실행 시 호스트 IP(`192.168.0.24`) 접근 권한 및 방화벽 설정이 필요합니다.
+* **네트워크**: 도커 컨테이너에서 실행 시 호스트 IP 접근 권한 및 방화벽 설정이 필요합니다.
 
 ## 💻 코드 상세 설명
 
@@ -29,7 +29,7 @@
 ```python
 def start_durability_test(file_path, stream_name):
     # 송출 대상 서버 주소 (윈도우 호스트 IP 및 RTSP 기본 포트 8554)
-    rtsp_url = f"rtsp://192.168.0.24:8554/{stream_name}"
+    rtsp_url = f"rtsp주소/{stream_name}"
     
     command = [
         'ffmpeg',
@@ -49,8 +49,8 @@ def start_durability_test(file_path, stream_name):
     ]
     # 백그라운드 프로세스 실행 (로그 출력 제외로 성능 최적화)
     return subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
-
+```
+## 💻 전체 코드
 ```python
 # 객체 탐지 내구성 테스트용 RTSP 다중 송출 프로그램
 # 8554 포트 활용, 채널명 test1~30 확장
@@ -119,4 +119,51 @@ except KeyboardInterrupt:
 ```
 
 
+## ⚙️ 2. FFmpeg 주요 옵션 상세
 
+다중 채널 송출 시 리소스 효율을 극대화하기 위해 다음과 같은 옵션을 사용합니다.
+
+| 옵션 | 원리 및 역할 |
+| :--- | :--- |
+| **`-re`** | 원본 영상의 프레임 레이트(FPS)에 맞춰 데이터를 읽어 실시간 스트리밍 속도를 구현합니다. |
+| **`-preset ultrafast`** | 인코딩 연산량을 최소로 줄여 30개 이상의 다중 채널 송출 시에도 CPU 부하를 방지합니다. |
+| **`-vf scale=640:360`** | 고해상도 영상을 저해상도로 변환하여 네트워크 대역폭과 시스템 리소스를 크게 절약합니다. |
+| **`-rtsp_transport tcp`** | 도커-호스트 간 가상 네트워크 환경에서 데이터 유실 없는 안정적인 송출을 보장합니다. |
+
+---
+
+## 🚀 실행 및 모니터링
+
+시스템을 가동하고 스트리밍 상태를 확인하는 방법입니다.
+
+1. **서버 실행**: 윈도우 터미널(CMD/PowerShell)에서 MediaMTX 폴더로 이동 후 실행합니다.
+   ```bash
+   ./mediamtx
+   ```
+   스크립트 실행: 컨테이너 내부 터미널에서 파이썬 스크립트를 실행합니다.
+
+```bash
+python RTSP.py
+```
+결과 확인:
+
+WebRTC: 브라우저 주소창에 확인 주소/test1 입력 (실시간 확인)
+
+RTSP: VLC 플레이어에서 rtsp://ip:port/test1 열기 (네트워크 스트림 확인)
+
+## ⚠️ 주의 사항
+성공적인 연결을 위해 다음 두 가지 사항을 반드시 확인하세요.
+
+Localhost 이슈 (Network Isolation):
+
+도커 컨테이너 내부에서 127.0.0.1은 컨테이너 자신을 가리킵니다.
+
+윈도우 호스트에 있는 MediaMTX에 접속하려면 반드시 호스트 IP(192.168.0.24) 또는 **host.docker.internal**을 사용해야 합니다.
+
+윈도우 방화벽 설정:
+
+윈도우 방화벽에서 MediaMTX가 사용하는 다음 포트들의 인바운드 허용이 필수적입니다.
+
+8554 포트: RTSP 송수신용
+
+8889 포트: WebRTC 웹 모니터링용
