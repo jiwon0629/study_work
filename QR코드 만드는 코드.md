@@ -34,3 +34,4 @@ if __name__ == "__main__":
     
     create_qr_code(target_url, save_name)
 ```
+참고 : https://wikidocs.net/262365
