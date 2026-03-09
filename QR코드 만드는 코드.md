@@ -1,3 +1,9 @@
+```bash
+pip install qrcode[pil]
+```
+
+
+
 ```python
 import qrcode
 
