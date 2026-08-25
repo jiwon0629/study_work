@@ -1,0 +1,17 @@
+%YAML:1.0
+
+NvDCF:
+  useColorNames: 1
+  useHog: 1
+  useHighPrecisionFeature: 1
+  minMatchingScore4Overall: 0.2
+  minMatchingScore4Iou: 0.1
+  maxTargetsPerStream: 150
+  filterLr: 0.1
+  gaussianSigma: 0.75
+  minDetectorConfidence: 0.2
+  minTrackerConfidence: 0.2
+  maxShadowTrackingAge: 90
+  probationAge: 3
+  earlyTerminationAge: 1
+

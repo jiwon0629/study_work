@@ -1,0 +1,11 @@
+teamgrit/
+.venv/
+venv/
+__pycache__/
+
+*.pt
+*.pth
+*.onnx
+*.engine
+*.trt
+*.data

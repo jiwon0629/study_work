@@ -1,0 +1,5 @@
+# Ignore model binary files, keep Python source code
+src/model/*.pt
+src/model/*.onnx
+src/model/*.trt
+src/model/*.engine

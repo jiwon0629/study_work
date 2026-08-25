@@ -1,0 +1,9 @@
+L01 - Car: 1022, Human: 5250
+L02 - Car: 4096, Human: 386
+L03 - Car: 1113, Human: 417
+L04 - Car: 268, Human: 473
+L05 - Car: 1595, Human: 2756
+L06 - Car: 3130, Human: 78
+L07 - Car: 998, Human: 37
+L08 - Car: 1995, Human: 94
+L10 - Car: 0, Human: 5171

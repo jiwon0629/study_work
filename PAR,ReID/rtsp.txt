@@ -1,0 +1,7 @@
+ALL_CAMERAS = {
+    "cam1": "rtsp://admin:qazwsx123!@192.168.0.22:554/0/H.264/media.smp", # 한화비전 - 25
+    "cam2": "rtsp://admin:qazwsx123!@192.168.0.16:554/H.264/media.smp",# 한화비전
+    "cam3": "rtsp://admin:qazwsx123!@192.168.0.77:554/H.264/media.smp",# 한화비전
+    "cam4": "rtsp://admin:qazwsx123!@192.168.0.11:554/0/H.264/media.smp", # 한화비전
+    "cam5": "rtsp://admin:qazwsx123!@192.168.0.14:554/4/H.264/media.smp", # 한화비전 - 17
+}
