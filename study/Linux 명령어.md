@@ -92,3 +92,14 @@ grep
 ```
 find
 ```
+프로그램 명령어 위치 확인
+```
+which
+```
+
+
+ipconfig
+
+ip addr
+
+netstat -na | more
