@@ -103,3 +103,19 @@ ipconfig
 ip addr
 
 netstat -na | more
+
+netstat - 네트워크 접속, 라우팅 테이블, 네트워크 인터페이스의 통계 정보를 보여주는 도구  
+
+사용 방법 :  
+netstat [옵션] [| grep 포트 번호 or 서비스 명]  
+
+option :   
+-l (listen) : 연결 가능한 상태  
+-n (number port) : 포트 넘버  
+-t (tcp) : tcp  
+-u (udp) : udp  
+-p : 프로그램 이름 / PID  
+-a : 모두  
+-i : 이더넷 카드별 정상/에러/드랍 송수신 패킷 수 확인  
+-r : 라우팅 테이블  
+-s : 네트워크 통계  
