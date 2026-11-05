@@ -1,9 +1,9 @@
 # ID 안정화 (ID switch/drift 방지) 기법
 2026-10-22 Alpha 리서치. 목적: 카메라 간 ID 변질 방지. 라이선스는 reid-licenses.md 참조.
 
-1. 트래킹 연관 계열
+1. 트래킹 연관 계열  
 |기법|출처|핵심 아이디어|
-BoT-SORT	arXiv 2206.14651	ByteTrack + 카메라 모션 보정(CMC) + appearance. Ultralytics 내장. (2026 중반 TrackTrack으로 후속)
+|BoT-SORT|	arXiv 2206.14651|	ByteTrack + 카메라 모션 보정(CMC) + appearance. Ultralytics 내장. (2026 중반 TrackTrack으로 후속)|
 Deep OC-SORT	ICCV 2023	모션 중심 유지, 적응형 appearance 가중치 — appearance가 신뢰 낮으면 모션 위주로 자동 전환. 가림·재등장에서 ID 유지 강함
 Hybrid-SORT	AAAI 2024	weak cue(height, confidence 등) 모듈 결합
 HeteroAssoc	2025	이기종 cue 계층 연관
