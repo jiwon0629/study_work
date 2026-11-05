@@ -20,3 +20,7 @@ Offline refinement: 세션(배치) 단위 궤적 재클러스터링으로 온라
 6.1 c18d758: fisheye.py + min travel time gate
 6.2 5a283e2: Embedding EMA α=0.7 + lost-buffer re-entry
 6.3 e2007bc: 적응형 appearance trust — 기본값 전부 하위호환
+
++-------+----+---+
+| d    |   |   |
++---+----+---+
