@@ -5,11 +5,11 @@
 
 | 기법 | 출처 | 핵심 아이디어 |
 | :--- | :--- | :--- |
-| **Dockerfile** | 빌드 스크립트 | **레시피** |
+| **BoT-SORT** | arXiv 2206.14651 | **ByteTrack + 카메라 모션 보정(CMC) + appearance. Ultralytics 내장. (2026 중반 TrackTrack으로 후속)** |
 | **Image** | 실행 패키지 | **밀키트** |
 | **Container** | 프로세스 | **요리 완성본** |
 
-||	arXiv 2206.14651|	ByteTrack + 카메라 모션 보정(CMC) + appearance. Ultralytics 내장. (2026 중반 TrackTrack으로 후속)|
+||	|	|
 Deep OC-SORT	ICCV 2023	모션 중심 유지, 적응형 appearance 가중치 — appearance가 신뢰 낮으면 모션 위주로 자동 전환. 가림·재등장에서 ID 유지 강함
 Hybrid-SORT	AAAI 2024	weak cue(height, confidence 등) 모듈 결합
 HeteroAssoc	2025	이기종 cue 계층 연관
