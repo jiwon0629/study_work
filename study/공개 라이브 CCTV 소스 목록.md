@@ -7,22 +7,25 @@
 - 녹화: .openclaw/bin/yt-dlp 사용 (예: yt-dlp -f "bv*[height<=720]" -o "tmp/<name>-%(epoch)s.mp4" <live_url> — 라이브는 --live-from-start 또는 구간 녹화)
 
 # 거리·보행자 (근거리 밀집 — Re-ID·다중 추적 적합)
-New Orleans 거리 뷰 — EarthCam: https://www.youtube.com/live/xqdukYhcGEU
-New Orleans 발코니 뷰 (부감) — EarthCam: https://www.youtube.com/live/QxFFjXu_zqs
-신주쿠 가부키초 라이브 2 (야간 거리): https://www.youtube.com/live/gFRtAAmiFbE
-신주쿠 가부키초 24시간 라이브: https://www.youtube.com/live/DjdUEyjx8GM
-시부야 스크램블 교차점 — FNN 프라임: https://www.youtube.com/live/dfVK7ld38Ys
-시부야 센터가이 인노카이도리 거리: https://www.youtube.com/live/Xy2sLEMEj5Y
-시부야 센터가이 메인아치 앞: https://www.youtube.com/live/d1JuNg7knNo
-공항 (원거리 + 다양한 사물 — 항공기·차량 이동)
-하네다공항 1 — 아사히신문 격납고: https://www.youtube.com/live/_o2Ejpmets8
-하네다공항 2: https://www.youtube.com/live/G7djnZQ-OPc
-하네다공항 3: https://www.youtube.com/live/0ytmbJ6mn70
-철도 (고정 2대 + PTZ 1대 — 동일 장소 멀티뷰, 카메라 간 매칭 테스트 적합)
-Ashland, Virginia 남측 고정 뷰 — Virtual Railfan: https://www.youtube.com/live/_Kk5anP-dQg
-Ashland, Virginia PTZ (가변): https://www.youtube.com/live/4XYbh4Pegzw
-Ashland, Virginia 북측 고정 뷰: https://www.youtube.com/live/8CgXXdx97DA
-특기 가치
-Ashland 철도 3대 세트: 같은 장면을 고정×2 + PTZ×1로 보는 구성이라 멀티카메라 Re-ID(카메라 간 동일 인물 매칭) 테스트에 가장 적합
-가부키초·시부야: 밀집 보행 + 야간 조명 — 저조도·오클루전 시나리오
-New Orleans 부감 뷰: 어안은 아니지만 상부 각도 촬영 — 설치 각도 다양화
+-New Orleans 거리 뷰 — EarthCam: https://www.youtube.com/live/xqdukYhcGEU
+- New Orleans 발코니 뷰 (부감) — EarthCam: https://www.youtube.com/live/QxFFjXu_zqs
+- 신주쿠 가부키초 라이브 2 (야간 거리): https://www.youtube.com/live/gFRtAAmiFbE
+- 신주쿠 가부키초 24시간 라이브: https://www.youtube.com/live/DjdUEyjx8GM
+- 시부야 스크램블 교차점 — FNN 프라임: https://www.youtube.com/live/dfVK7ld38Ys
+- 시부야 센터가이 인노카이도리 거리: https://www.youtube.com/live/Xy2sLEMEj5Y
+- 시부야 센터가이 메인아치 앞: https://www.youtube.com/live/d1JuNg7knNo
+
+# 공항 (원거리 + 다양한 사물 — 항공기·차량 이동)
+- 하네다공항 1 — 아사히신문 격납고: https://www.youtube.com/live/_o2Ejpmets8
+- 하네다공항 2: https://www.youtube.com/live/G7djnZQ-OPc
+- 하네다공항 3: https://www.youtube.com/live/0ytmbJ6mn70
+
+# 철도 (고정 2대 + PTZ 1대 — 동일 장소 멀티뷰, 카메라 간 매칭 테스트 적합)
+- Ashland, Virginia 남측 고정 뷰 — Virtual Railfan: https://www.youtube.com/live/_Kk5anP-dQg
+- Ashland, Virginia PTZ (가변): https://www.youtube.com/live/4XYbh4Pegzw
+- Ashland, Virginia 북측 고정 뷰: https://www.youtube.com/live/8CgXXdx97DA
+
+# 특기 가치
+- Ashland 철도 3대 세트: 같은 장면을 고정×2 + PTZ×1로 보는 구성이라 멀티카메라 Re-ID(카메라 간 동일 인물 매칭) 테스트에 가장 적합
+- 가부키초·시부야: 밀집 보행 + 야간 조명 — 저조도·오클루전 시나리오
+- New Orleans 부감 뷰: 어안은 아니지만 상부 각도 촬영 — 설치 각도 다양화
