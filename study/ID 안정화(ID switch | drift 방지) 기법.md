@@ -3,13 +3,12 @@
 
 1. 트래킹 연관 계열
 
-| 기법 | 출처 | 핵십 아이디어 |
+| 구성 요소 | 역할 | 비유 | 특징 |
 | :--- | :--- | :--- | :--- |
-| BoT-SORT | 빌드 스크립트 | **레시피** | 코드, 설정, 실행 명령을 순서대로 정의 |
+| **Dockerfile** | 빌드 스크립트 | **레시피** | 코드, 설정, 실행 명령을 순서대로 정의 |
 | **Image** | 실행 패키지 | **밀키트** | 불변성(Immutable), 버전 관리, 배포 단위 |
 | **Container** | 프로세스 | **요리 완성본** | 격리성, 효율성, 즉시 실행 및 삭제 가능 |
-|기법|출처|핵심 아이디어|
-| :--- | :--- | :--- | :--- |
+
 ||	arXiv 2206.14651|	ByteTrack + 카메라 모션 보정(CMC) + appearance. Ultralytics 내장. (2026 중반 TrackTrack으로 후속)|
 Deep OC-SORT	ICCV 2023	모션 중심 유지, 적응형 appearance 가중치 — appearance가 신뢰 낮으면 모션 위주로 자동 전환. 가림·재등장에서 ID 유지 강함
 Hybrid-SORT	AAAI 2024	weak cue(height, confidence 등) 모듈 결합
