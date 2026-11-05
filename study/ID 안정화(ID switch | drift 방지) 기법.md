@@ -9,8 +9,8 @@
 | **Image** | 실행 패키지 | **밀키트** |
 | **Container** | 프로세스 | **요리 완성본** |
 
-||	|	|
-Deep OC-SORT	ICCV 2023	모션 중심 유지, 적응형 appearance 가중치 — appearance가 신뢰 낮으면 모션 위주로 자동 전환. 가림·재등장에서 ID 유지 강함
+
+	ICCV 2023	모션 중심 유지, 적응형 appearance 가중치 — appearance가 신뢰 낮으면 모션 위주로 자동 전환. 가림·재등장에서 ID 유지 강함
 Hybrid-SORT	AAAI 2024	weak cue(height, confidence 등) 모듈 결합
 HeteroAssoc	2025	이기종 cue 계층 연관
 3. 표준 실무 패턴 (본 프로젝트 적용 대상)
